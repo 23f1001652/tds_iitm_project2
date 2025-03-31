@@ -16,19 +16,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+import logging
+logging.basicConfig(level=logging.INFO)
+
 @app.post("/api/")
-async def process_question(
-    question: str = Form(...),
-    file: Optional[UploadFile] = File(None)
-):
+async def process_question(question: str = Form(...), file: Optional[UploadFile] = File(None)):
+    logging.info(f"Received question: {question}")
     try:
         temp_file_path = None
         if file:
             temp_file_path = await save_upload_file_temporarily(file)
+            logging.info(f"File saved to: {temp_file_path}")
         
-        # Get answer from OpenAI
         answer = await get_openai_response(question, temp_file_path)
-        
+        logging.info(f"Answer: {answer}")
         return {"answer": answer}
     except Exception as e:
+        logging.error(f"Error occurred: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
