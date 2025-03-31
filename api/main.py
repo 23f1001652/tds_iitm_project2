@@ -2,8 +2,8 @@ from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from typing import Optional
-from app.utils.openai_client import get_openai_response
-from app.utils.file_handler import save_upload_file_temporarily
+from api.utils.openai_client import get_openai_response
+from api.utils.file_handler import save_upload_file_temporarily
 
 app = FastAPI(title="IITM Assignment API")
 import ssl

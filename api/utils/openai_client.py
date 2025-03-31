@@ -9,7 +9,6 @@ import shutil
 import subprocess
 from typing import Optional, Dict, Any, List
 from dotenv import load_dotenv
-from api.utils.functions import execute_command, extract_zip_and_read_csv
 from api.utils.functions import *
 
 load_dotenv()
