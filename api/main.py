@@ -7,15 +7,6 @@ from api.utils.openai_client import get_openai_response
 from api.utils.file_handler import save_upload_file_temporarily
 
 app = FastAPI(title="IITM Assignment API")
-
-# Fix SSL issues if needed
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
-
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
